@@ -7,11 +7,11 @@ import java.util.Scanner;
  * Class representing a list of orders for one table
  */
 public class Table {
-	private final String[] STARTER = { "entrée", "salade", "soupe", "quiche", "aucune" };
-	private final String[] DISHES = { "plats", "poulet", "boeuf", "poisson", "végétarien", "vegan", "aucun" };
-	private final String[] SIDE_DISH = { "accompagnements", "riz", "pates", "frites", "légumes", "aucun" };
-	private final String[] DRINKS = { "boissons", "eau plate", "eau gazeuze", "soda", "vin", "aucune" };
-	private final String[] DESSERTS = { "desserts", "tarte maison", "mousse au chocolat", "tiramisu", "aucun" };
+	private final String[] STARTER = { "Entrée", "Salade", "Soupe", "Quiche", "Aucune" };
+	private final String[] DISHES = { "Plats", "Poulet", "Boeuf", "Poisson", "Végétarien", "Vegan", "aucun" };
+	private final String[] SIDE_DISH = { "Accompagnements", "Riz", "Pâtes", "Frites", "Légumes", "Aucun" };
+	private final String[] DRINKS = { "Boissons", "Eau plate", "Eau gazeuze", "Soda", "Vin", "Aucune" };
+	private final String[] DESSERTS = { "Desserts", "Tarte maison", "Mousse au chocolat", "Tiramisu", "aucun" };
 
 	ArrayList<Order> orders;
 	/**
@@ -68,7 +68,7 @@ public class Table {
 				order.addDish(DESSERTS[result]);
 
 			System.out.println("Résumé de la commande " + (i + 1));
-			System.out.println(order); // ici on pourrait stocker la commande en base par exemple
+			order.displayOrder(); // ici on pourrait stocker la commande en base par exemple
 			System.out.println(); // avant de passer à la suivante
 			this.orders.add(new Order(order.getOrder()));
 			order.clearOrder();
