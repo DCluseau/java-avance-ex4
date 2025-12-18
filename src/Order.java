@@ -46,14 +46,4 @@ public class Order {
 			System.out.println(this.order.get(i));
 		}
 	}
-	
-	/**
-	 * 
-	 * @param table
-	 */
-	/*
-	 * public void displayTable(String[] table) { for (int i = 1; i < table.length;
-	 * i++) { System.out.print("[" + i + " - " + table[i].toUpperCase() + "]"); }
-	 * System.out.println(); }
-	 */
 }
