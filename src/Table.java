@@ -1,6 +1,7 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -8,6 +9,45 @@ import java.util.Scanner;
  */
 public class Table {
 	private final String[] STARTER = { "Entrée", "Salade", "Soupe", "Quiche", "Aucune" };
+	private final HashMap<String, Double> STARTER2 = new HashMap<String, Double>(){{
+		put("Entrée" , 0.0);
+		put("Salade" , 2.0);
+		put("Soupe" , 3.5);
+		put("Ouiche" , 4.7);
+		put("Aucune" , 0.0);
+	}};
+	private final HashMap<String, Double> DISHES2 = new HashMap<String, Double>(){{
+		put("Plats" , 0.0);
+		put("Poulet" , 2.0);
+		put("Boeuf" , 3.5);
+		put("Poisson" , 4.7);
+		put("Végétarien" , 1.5);
+		put("Vegan" , 1.0);
+		put("Aucun" , 0.0);
+	}};
+	private final HashMap<String, Double> SIDE_DISH2 = new HashMap<String, Double>(){{
+		put("Accompagnements" , 0.0);
+		put("Riz" , 2.0);
+		put("Pâtes" , 3.5);
+		put("Frites" , 4.7);
+		put("Légumes" , 1.5);
+		put("Aucun" , 0.0);
+	}};
+	private final HashMap<String, Double> DRINKS2 = new HashMap<String, Double>(){{
+		put("Boissons" , 0.0);
+		put("Eau plate" , 2.0);
+		put("Eau gazeuze" , 3.5);
+		put("Soda" , 4.7);
+		put("Vin" , 1.5);
+		put("Aucune" , 0.0);
+	}};
+	private final HashMap<String, Double> DESSERTS2 = new HashMap<String, Double>(){{
+		put("Desserts" , 0.0);
+		put("Tarte maison" , 2.0);
+		put("Mousse au chocolat" , 3.5);
+		put("Tiramisu" , 4.7);
+		put("Aucun" , 0.0);
+	}};
 	private final String[] DISHES = { "Plats", "Poulet", "Boeuf", "Poisson", "Végétarien", "Vegan", "aucun" };
 	private final String[] SIDE_DISH = { "Accompagnements", "Riz", "Pâtes", "Frites", "Légumes", "Aucun" };
 	private final String[] DRINKS = { "Boissons", "Eau plate", "Eau gazeuze", "Soda", "Vin", "Aucune" };
