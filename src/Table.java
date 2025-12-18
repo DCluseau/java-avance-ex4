@@ -39,12 +39,16 @@ public class Table {
 		Order order = new Order();
 		System.out.println("bonjour, combien de menus souhaitez vous ?");
 		Scanner scan = new Scanner(System.in);
-		int nbMenu;
-		while (scan.hasNextInt() == false) {
-			scan.next();
-		}	
-		nbMenu = scan.nextInt();
-		
+		int nbMenu = 0;
+		try {
+			while (scan.hasNextInt() == false) {
+				scan.next();
+			}	
+			nbMenu = scan.nextInt();
+		}catch(Exception e){
+			System.out.println("Erreur de saisie : " + e.getMessage());
+		}
+			
 		for (int i = 0; i < nbMenu; i++) {
 			System.out.println("Commande numéro " + (i + 1));
 			int result = this.getInfos(scan, STARTER[0]);
@@ -84,6 +88,7 @@ public class Table {
 	 * @return what the user chose
 	 */
 	public int getInfos(Scanner scan, String info) {
+		int choice = 0;
 		System.out.println("choix " + info + " : ");
 		if (info.equalsIgnoreCase(this.STARTER[0]))
 			this.displayTable(this.STARTER);
@@ -96,7 +101,12 @@ public class Table {
 		else if (info.equalsIgnoreCase(this.DESSERTS[0]))
 			this.displayTable(this.DESSERTS);
 		System.out.println("que souhaitez vous comme " + info + " ? [saisir le chiffre correspondant]");
-		return scan.nextInt();
+		try {
+			choice = scan.nextInt(); 
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return choice;
 	}
 	
 	/**
@@ -115,7 +125,7 @@ public class Table {
 			}
 			myWriter.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 }
