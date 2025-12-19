@@ -8,50 +8,45 @@ import java.util.Scanner;
  * Class representing a list of orders for one table
  */
 public class TablePrice {
-	private final String[] STARTER = { "Entrée", "Salade", "Soupe", "Quiche", "Aucune" };
 	private final HashMap<String, Double> STARTER2 = new HashMap<String, Double>(){{
 		put("Entrée" , 0.0);
-		put("Salade" , 2.0);
-		put("Soupe" , 3.5);
+		put("Mensonge" , 2.0);
+		put("Les clés de ta 106" , 3.5);
 		put("Ouiche" , 4.7);
 		put("Aucune" , 0.0);
 	}};
 	private final HashMap<String, Double> DISHES2 = new HashMap<String, Double>(){{
 		put("Plats" , 0.0);
-		put("Poulet" , 2.0);
-		put("Boeuf" , 3.5);
-		put("Poisson" , 4.7);
-		put("Végétarien" , 1.5);
-		put("Vegan" , 1.0);
+		put("Flic" , 2.0);
+		put("Boeuf Lok-Lak" , 3.5);
+		put("Poisson d'Ordralphabétix" , 4.7);
+		put("Oeuf de cent ans" , 1.5);
+		put("Pelouse tondue" , 1.0);
 		put("Aucun" , 0.0);
 	}};
 	private final HashMap<String, Double> SIDE_DISH2 = new HashMap<String, Double>(){{
 		put("Accompagnements" , 0.0);
-		put("Riz" , 2.0);
-		put("Pâtes" , 3.5);
-		put("Frites" , 4.7);
-		put("Légumes" , 1.5);
+		put("Chili con padre" , 2.0);
+		put("Beurre salé" , 3.5);
+		put("Frites du McDo" , 4.7);
+		put("Truc vert pas bon" , 1.5);
 		put("Aucun" , 0.0);
 	}};
 	private final HashMap<String, Double> DRINKS2 = new HashMap<String, Double>(){{
 		put("Boissons" , 0.0);
-		put("Eau plate" , 2.0);
-		put("Eau gazeuze" , 3.5);
-		put("Soda" , 4.7);
-		put("Vin" , 1.5);
+		put("Crêpe aquatique" , 2.0);
+		put("RedBull 100% taurine" , 3.5);
+		put("Whisky irlandais" , 4.7);
+		put("Piquette" , 1.5);
 		put("Aucune" , 0.0);
 	}};
 	private final HashMap<String, Double> DESSERTS2 = new HashMap<String, Double>(){{
 		put("Desserts" , 0.0);
-		put("Tarte maison" , 2.0);
-		put("Mousse au chocolat" , 3.5);
-		put("Tiramisu" , 4.7);
+		put("Tarte dans la gueule" , 2.0);
+		put("Mousse au chocolat du patron" , 3.5);
+		put("Dessert italien pas terrible" , 4.7);
 		put("Aucun" , 0.0);
 	}};
-	private final String[] DISHES = { "Plats", "Poulet", "Boeuf", "Poisson", "Végétarien", "Vegan", "aucun" };
-	private final String[] SIDE_DISH = { "Accompagnements", "Riz", "Pâtes", "Frites", "Légumes", "Aucun" };
-	private final String[] DRINKS = { "Boissons", "Eau plate", "Eau gazeuze", "Soda", "Vin", "Aucune" };
-	private final String[] DESSERTS = { "Desserts", "Tarte maison", "Mousse au chocolat", "Tiramisu", "aucun" };
 
 	ArrayList<Order> orders;
 	/**
@@ -65,9 +60,11 @@ public class TablePrice {
 	 * Display the available dishes
 	 * @param table
 	 */
-	public void displayTable(String[] table) {
-		for (int i = 1; i < table.length; i++) {
-			System.out.print("[" + i + " - " + table[i].toUpperCase() + "]");
+	public void displayTable(HashMap<String, Double> table) {
+		
+		for (int i = 1; i < table.size(); i++) {
+			table.forEach((key, value) -> {System.out.print("[" + i + " - " + key.toUpperCase() + " ----- " + value + "0 €]");});
+			//System.out.print("[" + i + " - " + table[i].toUpperCase() + "]");
 		}
 		System.out.println();
 	}
@@ -91,25 +88,25 @@ public class TablePrice {
 			
 		for (int i = 0; i < nbMenu; i++) {
 			System.out.println("Commande numéro " + (i + 1));
-			int result = this.getInfos(scan, STARTER[0]);
-			if (STARTER.length - 1 > result)
-				order.addDish(STARTER[result]);
+			int result = this.getInfos(scan, "Entrées");
+			if (STARTER2.size() - 1 > result)
+				order.addDish(STARTER2[result]);
 
-			result = this.getInfos(scan, DISHES[0]);
-			if (DISHES.length - 1 > result)
-				order.addDish(DISHES[result]);
+			result = this.getInfos(scan, "Plats");
+			if (DISHES2.size() - 1 > result)
+				order.addDish(DISHES2[result]);
 
-			result = this.getInfos(scan, SIDE_DISH[0]);
-			if (SIDE_DISH.length - 1 > result)
-				order.addDish(SIDE_DISH[result]);
+			result = this.getInfos(scan, "Accompagnements");
+			if (SIDE_DISH2.size() - 1 > result)
+				order.addDish(SIDE_DISH2[result]);
 
-			result = this.getInfos(scan, DRINKS[0]);
-			if (DRINKS.length - 1 > result)
-				order.addDish(DRINKS[result]);
+			result = this.getInfos(scan, "Boissons");
+			if (DRINKS2.size() - 1 > result)
+				order.addDish(DRINKS2[result]);
 
-			result = this.getInfos(scan, DESSERTS[0]);
-			if (DESSERTS.length - 1 > result)
-				order.addDish(DESSERTS[result]);
+			result = this.getInfos(scan, "Desserts");
+			if (DESSERTS2.size() - 1 > result)
+				order.addDish(DESSERTS2[result]);
 
 			System.out.println("Résumé de la commande " + (i + 1));
 			order.displayOrder(); // ici on pourrait stocker la commande en base par exemple
@@ -130,16 +127,16 @@ public class TablePrice {
 	public int getInfos(Scanner scan, String info) {
 		int choice = 0;
 		System.out.println("choix " + info + " : ");
-		if (info.equalsIgnoreCase(this.STARTER[0]))
-			this.displayTable(this.STARTER);
-		else if (info.equalsIgnoreCase(this.DISHES[0]))
-			this.displayTable(this.DISHES);
-		else if (info.equalsIgnoreCase(this.SIDE_DISH[0]))
-			this.displayTable(this.SIDE_DISH);
-		else if (info.equalsIgnoreCase(this.DRINKS[0]))
-			displayTable(this.DRINKS);
-		else if (info.equalsIgnoreCase(this.DESSERTS[0]))
-			this.displayTable(this.DESSERTS);
+		if (info.equalsIgnoreCase("Entrée"))
+			this.displayTable(this.STARTER2);
+		else if (info.equalsIgnoreCase("Plats"))
+			this.displayTable(this.DISHES2);
+		else if (info.equalsIgnoreCase("Accompagnements"))
+			this.displayTable(this.SIDE_DISH2);
+		else if (info.equalsIgnoreCase("Boissons"))
+			displayTable(this.DRINKS2);
+		else if (info.equalsIgnoreCase("Desserts"))
+			this.displayTable(this.DESSERTS2);
 		System.out.println("que souhaitez vous comme " + info + " ? [saisir le chiffre correspondant]");
 		try {
 			choice = scan.nextInt(); 
