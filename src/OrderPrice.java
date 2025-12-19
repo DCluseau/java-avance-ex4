@@ -43,6 +43,15 @@ public class OrderPrice {
 	}
 	
 	public void displayOrder() {
-		this.order.forEach((key, value) -> {System.out.println(key + " --------- " + value + "0€");});
+		this.order.forEach((key, value) -> {System.out.println(key + " --------- " + value + "0€\n");});
+	}
+	
+	public String toString() {
+		String finalDisplay = "";
+		for(String key : this.order.keySet()) {
+			finalDisplay += key + "-----" + this.order.get(key) + "0 €\n";;
+		}
+		return finalDisplay;
+		
 	}
 }
