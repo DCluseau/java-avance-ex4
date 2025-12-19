@@ -8,6 +8,12 @@ import java.util.Scanner;
  * Class representing a list of orders for one table
  */
 public class TablePrice {
+	private final String[] STARTER = { "Entrée", "Salade", "Soupe", "Quiche", "Aucune" };
+	private final String[] DISHES = { "Plats", "Poulet", "Boeuf", "Poisson", "Végétarien", "Vegan", "aucun" };
+	private final String[] SIDE_DISH = { "Accompagnements", "Riz", "Pâtes", "Frites", "Légumes", "Aucun" };
+	private final String[] DRINKS = { "Boissons", "Eau plate", "Eau gazeuze", "Soda", "Vin", "Aucune" };
+	private final String[] DESSERTS = { "Desserts", "Tarte maison", "Mousse au chocolat", "Tiramisu", "aucun" };
+	
 	private final HashMap<String, Double> STARTER2 = new HashMap<String, Double>(){{
 		put("Entrée" , 0.0);
 		put("Mensonge" , 2.0);
@@ -48,12 +54,12 @@ public class TablePrice {
 		put("Aucun" , 0.0);
 	}};
 
-	ArrayList<Order> orders;
+	ArrayList<OrderPrice> orders;
 	/**
 	 * Constructor
 	 */
 	public TablePrice() {
-		this.orders = new ArrayList<Order>();
+		this.orders = new ArrayList<OrderPrice>();
 	}
 	
 	/**
@@ -61,19 +67,18 @@ public class TablePrice {
 	 * @param table
 	 */
 	public void displayTable(HashMap<String, Double> table) {
-		
 		for (int i = 1; i < table.size(); i++) {
-			table.forEach((key, value) -> {System.out.print("[" + i + " - " + key.toUpperCase() + " ----- " + value + "0 €]");});
-			//System.out.print("[" + i + " - " + table[i].toUpperCase() + "]");
+			for(String key: table.keySet()) {
+				System.out.print("[" + i + " - " + key.toUpperCase() + " ----- " + table.get(key) + "0 €]");
+			}
 		}
-		System.out.println();
 	}
 	
 	/**
 	 * Get customer's order
 	 */
 	public void getOrders() {
-		Order order = new Order();
+		OrderPrice order = new OrderPrice();
 		System.out.println("bonjour, combien de menus souhaitez vous ?");
 		Scanner scan = new Scanner(System.in);
 		int nbMenu = 0;
@@ -89,29 +94,29 @@ public class TablePrice {
 		for (int i = 0; i < nbMenu; i++) {
 			System.out.println("Commande numéro " + (i + 1));
 			int result = this.getInfos(scan, "Entrées");
-			if (STARTER2.size() - 1 > result)
-				order.addDish(STARTER2[result]);
+			if (STARTER.length - 1 > result)
+				order.addDish(STARTER[result], STARTER2.get(STARTER[result]));
 
 			result = this.getInfos(scan, "Plats");
-			if (DISHES2.size() - 1 > result)
-				order.addDish(DISHES2[result]);
+			if (DISHES.length - 1 > result)
+				order.addDish(DISHES[result], DISHES2.get(DISHES[result]));
 
 			result = this.getInfos(scan, "Accompagnements");
-			if (SIDE_DISH2.size() - 1 > result)
-				order.addDish(SIDE_DISH2[result]);
+			if (SIDE_DISH.length - 1 > result)
+				order.addDish(SIDE_DISH[result], SIDE_DISH2.get(SIDE_DISH[result]));
 
 			result = this.getInfos(scan, "Boissons");
-			if (DRINKS2.size() - 1 > result)
-				order.addDish(DRINKS2[result]);
+			if (DRINKS.length - 1 > result)
+				order.addDish(DRINKS[result], DRINKS2.get(DRINKS[result]));
 
 			result = this.getInfos(scan, "Desserts");
-			if (DESSERTS2.size() - 1 > result)
-				order.addDish(DESSERTS2[result]);
+			if (DESSERTS.length - 1 > result)
+				order.addDish(DESSERTS[result], DESSERTS2.get(DESSERTS[result]));
 
 			System.out.println("Résumé de la commande " + (i + 1));
 			order.displayOrder(); // ici on pourrait stocker la commande en base par exemple
 			System.out.println(); // avant de passer à la suivante
-			this.orders.add(new Order(order.getOrder()));
+			this.orders.add(new OrderPrice(order.getOrder()));
 			order.clearOrder();
 		}
 		scan.close();
@@ -155,9 +160,8 @@ public class TablePrice {
 			myWriter = new FileWriter("ticket.txt");
 			for (int i = 0; i < this.orders.size(); i++) {
 				myWriter.write("******************** Résumé de la commande N° " + (i + 1) + " ********************\n");
-				for(String dish : this.orders.get(i).getOrder()) {
-					myWriter.write(dish + "\n");
-				}
+				this.orders.get(i).displayOrder();
+				myWriter.write(this.orders.get(i) + "\n");
 				  myWriter.write("\n");
 			}
 			myWriter.close();
