@@ -1,40 +1,41 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class OrderPrice {
 	
-	public ArrayList<String> order;
+	//private ArrayList<String> order;
+	private HashMap<String, Double> order;
 	
 	/**
 	 * Empty constructor 
 	 */
 	public OrderPrice() {
-		this.order = new ArrayList<String>();
+		this.order = new HashMap<String, Double>();
 	}
 	
 	/**
 	 * Constructor with parameter
 	 * @param order
 	 */
-	public OrderPrice(ArrayList<String> order) {
-		this.order = new ArrayList<String>(order);
+	public OrderPrice(HashMap<String, Double> order) {
+		this.order = new HashMap<String, Double>(order);
 	}
 	
 	/**
 	 * @return the order
 	 */
-	public ArrayList<String> getOrder() {
+	public HashMap<String, Double> getOrder() {
 		return order;
 	}
 
 	/**
 	 * @param order the order to set
 	 */
-	public void setOrder(ArrayList<String> order) {
+	public void setOrder(HashMap<String, Double> order) {
 		this.order = order;
 	}
 
-	public void addDish(String dish) {
-		this.order.add(dish);
+	public void addDish(String dish, Double price) {
+		this.order.put(dish, price);
 	}
 	
 	public void clearOrder() {
@@ -42,8 +43,6 @@ public class OrderPrice {
 	}
 	
 	public void displayOrder() {
-		for(int i = 0; i < this.order.size(); i++) {
-			System.out.println(this.order.get(i));
-		}
+		this.order.forEach((key, value) -> {System.out.println(key + " --------- " + value + "0€");});
 	}
 }
